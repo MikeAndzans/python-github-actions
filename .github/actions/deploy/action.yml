@@ -23,5 +23,15 @@ runs:
     - name: Start app with pm2
       shell: pwsh
       run: |
-        pm2 start app.py --name greetings-app-${{ inputs.env_name }} -- --port ${{ inputs.port }}
+        $py = (Get-Command python  -ErrorAction SilentlyContinue).Source `
+           ?? (Get-Command python3 -ErrorAction SilentlyContinue).Source
+        if (-not $py) {
+          throw "Python executable not found in PATH. \
+                 Install Python or add it to PATH, then re-run the job."
+        }
+
+        pm2 start app.py `
+          --name  "greetings-app-${{ inputs.env_name }}" `
+          --interpreter "$py" `
+          -- --port  ${{ inputs.port }}
       working-directory: python-greetings
