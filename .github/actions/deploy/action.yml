@@ -23,31 +23,7 @@ runs:
     - name: Start app with pm2
       shell: pwsh
       run: |
-        $py = (Get-Command python  -ErrorAction SilentlyContinue).Source `
-           ?? (Get-Command python3 -ErrorAction SilentlyContinue).Source
-        if (-not $py) {
-          throw "Python executable not found in PATH. \
-                 Install Python or add it to PATH, then re-run the job."
-        }
-
         pm2 start app.py `
           --name  "greetings-app-${{ inputs.env_name }}" `
-          --interpreter "$py" `
           -- --port  ${{ inputs.port }}
       working-directory: python-greetings
-
-    - name: Wait until the service responds
-      shell: pwsh
-      run: |
-        $url = "http://127.0.0.1:${{ inputs.port }}"
-        $max = 20   # 20 × 1 s  timeout ≈ 20 s
-        for ($i = 0; $i -lt $max; $i++) {
-          try {
-            Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 1 | Out-Null
-            Write-Host "Service is up!"
-            exit 0
-          } catch {
-            Start-Sleep -Seconds 1
-          }
-        }
-        throw "Service never became ready on $url"
