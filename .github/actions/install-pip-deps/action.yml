@@ -11,5 +11,6 @@ runs:
         repository: mtararujs/python-greetings
         path: python-greetings
     - name: Install Python requirements
+      shell: pwsh
       run: pip3 install -r requirements.txt
       working-directory: python-greetings

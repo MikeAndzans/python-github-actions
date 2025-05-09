@@ -15,9 +15,11 @@ runs:
         path: python-greetings
 
     - name: Stop previous instance (ignore error if not running)
+      shell: pwsh
       run: pm2 delete greetings-app-${{ inputs.env_name }} || true
 
     - name: Start app with pm2
+      shell: pwsh
       run: |
         pm2 start app.py --name greetings-app-${{ inputs.env_name }} -- --port ${{ inputs.port }}
       working-directory: python-greetings

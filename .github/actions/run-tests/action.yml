@@ -14,9 +14,11 @@ runs:
         path: api-tests
 
     - name: Install npm deps
+      shell: pwsh
       run: npm install
       working-directory: api-tests
 
     - name: Execute environment-specific tests
+      shell: pwsh
       run: npm run greetings greetings_${{ inputs.env_name }}
       working-directory: api-tests
