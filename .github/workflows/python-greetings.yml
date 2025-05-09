@@ -11,8 +11,9 @@ defaults:
 jobs:
   install-pip-deps:
     name: Install pip dependencies
-    runs-on: [self-hosted, windows]
+    runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v4
       - name: Installing all required dependencies…
         run: |
              echo "Stage: install-pip-deps"
@@ -23,6 +24,7 @@ jobs:
     runs-on: self-hosted
     needs: install-pip-deps
     steps:
+      - uses: actions/checkout@v4
       - name: Deploying to dev environment…
         run: |
             echo "Stage: deploy-to-dev"
@@ -36,6 +38,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-to-dev
     steps:
+      - uses: actions/checkout@v4
       - name: Running tests against dev…
         run: |
             echo "Stage: tests-on-dev"
@@ -47,6 +50,7 @@ jobs:
     runs-on: self-hosted
     needs: tests-on-dev
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: deploy-to-staging"
       - uses: ./.github/actions/deploy
@@ -58,6 +62,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-to-staging
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: tests-on-staging"
       - uses: ./.github/actions/run-tests
@@ -68,6 +73,7 @@ jobs:
     runs-on: self-hosted
     needs: tests-on-staging
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: deploy-to-preprod"
       - uses: ./.github/actions/deploy
@@ -79,6 +85,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-to-preprod
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: tests-on-preprod"
       - uses: ./.github/actions/run-tests
@@ -89,6 +96,7 @@ jobs:
     runs-on: self-hosted
     needs: tests-on-preprod
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: deploy-to-prod"
       - uses: ./.github/actions/deploy
@@ -100,6 +108,7 @@ jobs:
     runs-on: self-hosted
     needs: deploy-to-prod
     steps:
+      - uses: actions/checkout@v4
       - run: |
             echo "Stage: tests-on-prod"
       - uses: ./.github/actions/run-tests
