@@ -11,6 +11,7 @@ defaults:
 jobs:
   install-pip-deps:
     name: Install pip dependencies
+    # labels of local actions runner, forgot to name them properly while setting up
     runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Installing all required dependencies…
