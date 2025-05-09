@@ -25,6 +25,9 @@ runs:
       run: npm run greetings greetings_${{ inputs.env_name }}
       working-directory: api-tests
       
+    # that way we can be sure that pm2 runner is exited after tests run
+    # that's necesarry, because deploy stage can only get rid of it's env runner,
+    # not previously launched with another env name
     - name: Stop PM2 instance (ignore if already gone)
       shell: pwsh
       run: pm2 delete "greetings-app-${{ inputs.env_name }}"
