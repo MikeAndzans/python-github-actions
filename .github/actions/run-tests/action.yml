@@ -6,6 +6,8 @@ runs:
   steps:
     - name: Checkout pipeline repo
       uses: actions/checkout@v4
+      with:
+        clean: false
 
     - name: Checkout test framework repo
       uses: actions/checkout@v4
