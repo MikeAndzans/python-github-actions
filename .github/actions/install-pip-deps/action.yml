@@ -1,0 +1,15 @@
+name: install-pip-deps
+description: "Clone python-greetings repo and install its Python deps"
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout pipeline repo
+      uses: actions/checkout@v4
+    - name: Checkout python-greetings repo
+      uses: actions/checkout@v4
+      with:
+        repository: mtararujs/python-greetings
+        path: python-greetings
+    - name: Install Python requirements
+      run: pip3 install -r requirements.txt
+      working-directory: python-greetings
