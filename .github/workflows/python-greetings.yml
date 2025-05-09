@@ -55,7 +55,7 @@ jobs:
             echo "Stage: deploy-to-staging"
       - uses: ./.github/actions/deploy
         with:
-          env_name: staging
+          env_name: stg
           port: 7002
 
   tests-on-staging:
@@ -67,7 +67,7 @@ jobs:
             echo "Stage: tests-on-staging"
       - uses: ./.github/actions/run-tests
         with:
-          env_name: staging
+          env_name: stg
 
   deploy-to-preprod:
     runs-on: self-hosted
