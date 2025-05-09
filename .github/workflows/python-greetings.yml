@@ -39,6 +39,8 @@ jobs:
     needs: deploy-to-dev
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false
 
       - name: Running tests against dev…
         run: |
@@ -64,6 +66,8 @@ jobs:
     needs: deploy-to-staging
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false
             
       - run: |
             echo "Stage: tests-on-staging"
@@ -88,6 +92,8 @@ jobs:
     needs: deploy-to-preprod
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false
             
       - run: |
             echo "Stage: tests-on-preprod"
@@ -112,6 +118,8 @@ jobs:
     needs: deploy-to-prod
     steps:
       - uses: actions/checkout@v4
+        with:
+          clean: false
             
       - run: |
             echo "Stage: tests-on-prod"
