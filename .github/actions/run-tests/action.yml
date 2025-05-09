@@ -22,3 +22,8 @@ runs:
       shell: pwsh
       run: npm run greetings greetings_${{ inputs.env_name }}
       working-directory: api-tests
+      
+    - name: Stop PM2 instance (ignore if already gone)
+      shell: pwsh
+      run: pm2 delete "greetings-app-${{ inputs.env_name }}"
+      continue-on-error: true

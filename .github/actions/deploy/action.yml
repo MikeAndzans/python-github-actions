@@ -14,12 +14,6 @@ runs:
         repository: mtararujs/python-greetings
         path: python-greetings
 
-    - name: Stop previous instance (ignore error if not running)
-      shell: pwsh
-      run: pm2 delete greetings-app-${{ inputs.env_name }}
-      continue-on-error: true
-
-
     - name: Start app with pm2
       shell: pwsh
       run: |
