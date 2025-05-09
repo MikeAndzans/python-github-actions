@@ -1,0 +1,1 @@
+Piegādes konveijera izveide izmantojot rīku Github Actions
